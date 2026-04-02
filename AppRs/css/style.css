@@ -1,6 +1,4 @@
-/* =========================================
-   1. BASE STYLES & LAYOUT (Global)
-   ========================================= */
+/* 1. BASE STYLES & LAYOUT (Global) */
 * {
   box-sizing: border-box;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -34,9 +32,7 @@ body {
   margin-bottom: 15px;
 }
 
-/* =========================================
-   2. HEADERS & NAVIGATION (Global)
-   ========================================= */
+/* 2. HEADERS & NAVIGATION (Global) */
 .top-header {
   background: #1e90ff;
   color: white;
@@ -51,7 +47,6 @@ body {
   text-decoration: none;
   margin-right: 15px;
 }
-
 .bottom-nav {
   position: absolute;
   bottom: 0;
@@ -100,10 +95,7 @@ body {
   font-size: 24px;
   margin-bottom: 2px;
 }
-
-/* =========================================
-   3. FORMS, INPUTS & BUTTONS (Global)
-   ========================================= */
+/* 3. FORMS, INPUTS & BUTTONS (Global)*/
 .form-group {
   margin-bottom: 15px;
   position: relative;
@@ -130,7 +122,6 @@ body {
   border-color: #1e90ff;
   box-shadow: 0 0 5px rgba(30, 144, 255, 0.3);
 }
-
 /* Icon dalam input untuk Form Login/Daftar */
 .form-group i.fa-id-card,
 .form-group i.fa-lock,
@@ -145,7 +136,6 @@ body {
 .form-group input[placeholder*="Nomor Induk"] {
   padding-left: 40px;
 }
-
 .btn-primary {
   width: 100%;
   padding: 12px;
@@ -162,7 +152,6 @@ body {
 .btn-primary:active {
   background: #0073e6;
 }
-
 .alert {
   padding: 10px;
   border-radius: 8px;
@@ -178,10 +167,7 @@ body {
   background: #d4edda;
   color: #155724;
 }
-
-/* =========================================
-   4. HALAMAN LOGIN & DAFTAR
-   ========================================= */
+/* 4. HALAMAN LOGIN & DAFTAR */
 .header-login {
   background: linear-gradient(135deg, #1e90ff, #00bfff);
   color: white;
@@ -213,9 +199,7 @@ body {
   font-weight: bold;
 }
 
-/* =========================================
-   5. HALAMAN BERANDA (INDEX)
-   ========================================= */
+/* 5. HALAMAN BERANDA (INDEX)*/
 .header {
   background: linear-gradient(135deg, #1e90ff, #00bfff);
   padding: 20px 20px 40px 20px;
@@ -384,9 +368,7 @@ body {
   color: #888;
 }
 
-/* =========================================
-   6. HALAMAN PROFIL PASIEN
-   ========================================= */
+/* 6. HALAMAN PROFIL PASIEN */
 .profile-card {
   background: white;
   border-radius: 12px;
@@ -480,9 +462,7 @@ h4.section-title {
   font-weight: bold;
 }
 
-/* =========================================
-   7. HALAMAN JADWAL DOKTER
-   ========================================= */
+/* 7. HALAMAN JADWAL DOKTER */
 .search-box {
   background: white;
   padding: 10px 15px;

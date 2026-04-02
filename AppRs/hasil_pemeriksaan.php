@@ -50,7 +50,6 @@ $query_hasil = mysqli_query($koneksi, "
         .foto-container img {
             width: 100%; height: auto; display: block;
         }
-        /* Ikon placeholder jika foto tidak diload dengan baik */
         .foto-placeholder {
             padding: 40px 20px; color: #ccc;
         }
