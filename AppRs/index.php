@@ -2,7 +2,50 @@
 session_start();
 // Wajib panggil koneksi untuk mengambil data database
 require 'koneksi.php'; 
-
+$q_cek_mt = mysqli_query($koneksi, "SELECT nilai FROM pengaturan WHERE nama_pengaturan = 'maintenance_mode'");
+if ($q_cek_mt && mysqli_num_rows($q_cek_mt) > 0) {
+    $mt_data = mysqli_fetch_assoc($q_cek_mt);
+    if ($mt_data['nilai'] == '1') {
+        echo '
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Sistem Maintenance</title>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <style>
+                body { margin: 0; padding: 0; background: #eef2f5; font-family: "Segoe UI", sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+                .maintenance-card { background: white; width: 90%; max-width: 400px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; text-align: center; }
+                .card-header { background: #1877f2; padding: 40px 20px; color: white; }
+                .card-header i { font-size: 50px; margin-bottom: 15px; }
+                .card-header h2 { margin: 0; font-size: 24px; font-weight: bold; }
+                .card-header p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
+                .card-body { padding: 40px 30px; }
+                .card-body i { font-size: 60px; color: #ff9800; margin-bottom: 20px; }
+                .card-body h3 { margin: 0 0 10px 0; color: #333; font-size: 20px; }
+                .card-body p { color: #666; font-size: 15px; line-height: 1.6; margin: 0; }
+            </style>
+        </head>
+        <body>
+            <div class="maintenance-card">
+                <div class="card-header">
+                    <i class="fas fa-hospital-user"></i>
+                    <h2>RS Ludira Husada</h2>
+                    <p>Portal Pasien Online</p>
+                </div>
+                <div class="card-body">
+                    <i class="fas fa-tools"></i>
+                    <h3>Sistem Sedang Maintenance</h3>
+                    <p>Mohon maaf, Portal Pasien saat ini sedang dalam pembaruan rutin. Silakan coba beberapa saat lagi.</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        ';
+        exit; // Menghentikan seluruh proses PHP di bawahnya agar form asli tidak dimuat sama sekali
+    }
+}
+// ----------------------------
 // Cek apakah user sudah login
 if (!isset($_SESSION['login'])) {
     header("Location: login.php");

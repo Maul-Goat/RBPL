@@ -2,7 +2,26 @@
 session_start();
 // Pastikan hanya manajer yang bisa masuk
 if (!isset($_SESSION['karyawan_role']) || $_SESSION['karyawan_role'] !== 'manajer') { header("Location: login.php"); exit; }
-require '../koneksi.php'; // Path koneksi diperbaiki
+
+// Pastikan path koneksi ini sesuai dengan foldermu
+require '../koneksi.php'; 
+
+// --- LOGIKA DEVOPS (MAINTENANCE) ---
+if (isset($_POST['toggle_maintenance'])) {
+    $status_baru = $_POST['status_maintenance'];
+    mysqli_query($koneksi, "UPDATE pengaturan SET nilai = '$status_baru' WHERE nama_pengaturan = 'maintenance_mode'");
+    echo "<script>alert('Status Server berhasil diubah!'); window.location='laporan.php';</script>";
+}
+
+// Cek status saat ini
+$q_mt = mysqli_query($koneksi, "SELECT nilai FROM pengaturan WHERE nama_pengaturan = 'maintenance_mode'");
+if ($q_mt && mysqli_num_rows($q_mt) > 0) {
+    $mt = mysqli_fetch_assoc($q_mt);
+    $status_mt = $mt['nilai'];
+} else {
+    $status_mt = '0'; // Default jika tabel pengaturan belum terisi
+}
+// -----------------------------------
 
 // 1. Hitung Total Kunjungan Pasien
 $q_pasien = mysqli_query($koneksi, "SELECT COUNT(id) AS total_kunjungan FROM periksa");
@@ -26,7 +45,7 @@ $q_detail = mysqli_query($koneksi, "
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laporan - SIMRS</title>
+    <title>Laporan & DevOps - SIMRS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f4f7fa; margin: 0; display: flex; }
@@ -62,6 +81,23 @@ $q_detail = mysqli_query($koneksi, "
                 <small style="color:#888; font-weight:bold; text-transform:uppercase;">Total Pendapatan Kasir</small>
                 <h3 style="color:#28a745;"><i class="fas fa-wallet"></i> Rp <?php echo number_format($pendapatan, 0, ',', '.'); ?></h3>
             </div>
+        </div>
+
+        <div class="table-card" style="border-left: 5px solid #dc3545; margin-top: 20px;">
+            <h3 style="margin-top:0; color:#dc3545;"><i class="fas fa-tools"></i> Kontrol Server (DevOps Mode)</h3>
+            <p style="color:#666; font-size:14px;">Aktifkan mode ini jika sistem sedang melakukan update modul. Pasien tidak akan bisa mengakses portal aplikasi mandiri, namun seluruh karyawan tetap bisa bekerja secara internal.</p>
+            
+            <form method="POST">
+                <input type="hidden" name="status_maintenance" value="<?php echo $status_mt == '1' ? '0' : '1'; ?>">
+                
+                <?php if($status_mt == '1'): ?>
+                    <button type="submit" name="toggle_maintenance" style="background:#28a745; color:white; padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;"><i class="fas fa-play"></i> Matikan Mode Maintenance (Online-kan)</button>
+                    <span style="color:#dc3545; font-weight:bold; margin-left:15px; font-size:14px;"><i class="fas fa-exclamation-triangle"></i> SISTEM PORTAL PASIEN SEDANG OFFLINE</span>
+                <?php else: ?>
+                    <button type="submit" name="toggle_maintenance" style="background:#dc3545; color:white; padding:12px 20px; border:none; border-radius:8px; cursor:pointer; font-weight:bold;"><i class="fas fa-stop"></i> Aktifkan Mode Maintenance (Offline-kan)</button>
+                    <span style="color:#28a745; font-weight:bold; margin-left:15px; font-size:14px;"><i class="fas fa-check-circle"></i> SISTEM ONLINE NORMAL</span>
+                <?php endif; ?>
+            </form>
         </div>
 
         <div class="table-card">
