@@ -14,7 +14,7 @@ Perbaikan Bug (Bug Fixes)
 - Fix Variabel Mismatch: Menyeragamkan penamaan variabel pemanggil database menjadi $koneksi di seluruh modul aplikasi agar sesuai dengan standar environment server.
 
 Catatan Penting / Breaking Changes
-- Penghapusan Konfigurasi Vercel: File konfigurasi vercel.json dan pembatasan folder api/ telah dihapus sepenuhnya. Sistem kini berjalan bebas secara native menggunakan arsitektur standard PHP pada server InfinityFree.
+- Sistem kini berjalan bebas secara native menggunakan arsitektur standard PHP pada server InfinityFree.
 - Perubahan Kredensial Database: Parameter koneksi pada file koneksi.php telah diubah secara total. Host, Username, dan Nama Database kini menggunakan parameter bawaan panel InfinityFree (berawalan epiz_xxx atau if0_xxx) menggantikan database cloud sebelumnya.
 - Migrasi Folder Root: Seluruh file aplikasi (source code) dipindahkan ke dalam folder htdocs melalui File Manager agar dapat terbaca oleh publik.
 - Penyesuaian Penamaan File: Spasi pada nama folder lokal telah dihapus karena server Linux pada InfinityFree sangat sensitif terhadap penulisan spasi pada URL.
