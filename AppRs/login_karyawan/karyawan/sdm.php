@@ -92,7 +92,6 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
             <p style="font-size: 11px; opacity: 0.6; text-transform: uppercase; margin-top: 20px;">Menu SDM</p>
             <a href="sdm.php?page=dashboard" class="<?php echo $page == 'dashboard' ? 'active' : ''; ?>"><i class="fas fa-th-large"></i> Dashboard</a>
             <a href="sdm.php?page=pegawai" class="<?php echo ($page == 'pegawai' || $page == 'tambah') ? 'active' : ''; ?>"><i class="fas fa-users"></i> Data Pegawai</a>
-            <a href="#" style="opacity: 0.5;"><i class="fas fa-calendar-alt"></i> Jadwal Shift</a>
             <a href="logout.php" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </nav>
     </div>
@@ -110,11 +109,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
                     <h3>Data Pegawai</h3>
                     <p>Kelola NIP, Jabatan, dan Status</p>
                 </a>
-                <a href="#" class="stat-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Jadwal Shift</h3>
-                    <p>Atur jadwal kerja harian staf</p>
-                </a>
+            
             </div>
 
         <?php elseif($page == 'pegawai'): ?>
