@@ -1,0 +1,20 @@
+Release Notes: SIMRS (Sistem Informasi Manajemen Rumah Sakit)
+Versi: 1.1.0 (Cloud Deployment Release)
+Tanggal: 7 April 2026
+Platform: Web Application (PHP, MySQL)
+
+Fitur Baru (What's New)
+- Migrasi Cloud Hosting: Sistem berhasil di-deploy ke server online menggunakan layanan shared hosting (InfinityFree) dan database MySQL, sehingga aplikasi dapat diakses secara publik.
+- Modul DevOps (Maintenance Mode): Penambahan panel kontrol server di Dashboard Manajer. Manajer dapat mengubah status server menjadi "Maintenance", yang secara otomatis akan mengunci Portal Pasien dengan tampilan overlay card peringatan, tanpa mengganggu operasional internal karyawan.
+- Routing Otomatis Karyawan: Penambahan logika redirect cerdas pada modul login karyawan yang secara otomatis mengarahkan pengguna ke dasbor masing-masing berdasarkan peran (Manajer, Kasir, Administrasi, dll).
+
+Perbaikan Bug (Bug Fixes)
+- Fix Login Infinite Loop: Memperbaiki masalah ERR_TOO_MANY_REDIRECTS pada portal karyawan dengan menyesuaikan urutan inisiasi session agar tidak terjadi bentrok saat melakukan verifikasi hak akses (role).
+- Fix Broken Database Connection: Memperbaiki kegagalan pembacaan file koneksi.php pada sub-directory (folder karyawan) dengan mengimplementasikan absolute path menggunakan sintaks __DIR__.
+- Fix Variabel Mismatch: Menyeragamkan penamaan variabel pemanggil database menjadi $koneksi di seluruh modul aplikasi agar sesuai dengan standar environment server.
+
+Catatan Penting / Breaking Changes
+- Sistem kini berjalan bebas secara native menggunakan arsitektur standard PHP pada server InfinityFree.
+- Perubahan Kredensial Database: Parameter koneksi pada file koneksi.php telah diubah secara total. Host, Username, dan Nama Database kini menggunakan parameter bawaan panel InfinityFree (berawalan epiz_xxx atau if0_xxx) menggantikan database cloud sebelumnya.
+- Migrasi Folder Root: Seluruh file aplikasi (source code) dipindahkan ke dalam folder htdocs melalui File Manager agar dapat terbaca oleh publik.
+- Penyesuaian Penamaan File: Spasi pada nama folder lokal telah dihapus karena server Linux pada InfinityFree sangat sensitif terhadap penulisan spasi pada URL.
